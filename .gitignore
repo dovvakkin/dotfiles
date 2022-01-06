@@ -1,6 +1,6 @@
-/* zsh service files */
+# zsh service files
 zsh/.config/zsh/.zcompdump
 zsh/.config/zsh/plugins/
 
-/* Mac OS */
+# Mac OS
 .DS_Store
