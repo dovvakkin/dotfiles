@@ -27,3 +27,12 @@ alias psmem='ps auxf | sort -nr -k 4 | head -5'
 
 # get top process eating cpu ##
 alias pscpu='ps auxf | sort -nr -k 3 | head -5'
+
+# sleep macOS from terminal
+case "$(uname -s)" in
+
+Darwin)
+    # echo 'Mac OS X'
+    alias gosleep="osascript -e 'tell application \"Finder\" to sleep'"
+
+esac
