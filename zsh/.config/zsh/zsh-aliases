@@ -18,6 +18,11 @@ alias cp="cp -i"
 alias mv='mv -i'
 alias rm='rm -i'
 
+# svn diff from last merged trunk
+alias svnbranch='svn info | grep URL | cut -f2 -d " "'
+alias lasttrunk='svn pget "svn:mergeinfo" | grep -P "^/trunk:" | awk -F"-" "{print \$2}"'
+alias svndiff='svn diff --old ^/trunk@r$(lasttrunk) --new $(svnbranch)'
+
 # easier to read disk
 alias df='df -h'     # human-readable sizes
 alias free='free -m' # show sizes in MB
