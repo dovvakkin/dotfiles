@@ -27,6 +27,8 @@ alias svndiff='svn diff --old ^/trunk@r$(lasttrunk) --new $(svnbranch)'
 alias df='df -h'     # human-readable sizes
 alias free='free -m' # show sizes in MB
 
+alias sum_lines='paste -s -d+ - | bc'
+
 # get top process eating memory
 alias psmem='ps auxf | sort -nr -k 4 | head -5'
 
