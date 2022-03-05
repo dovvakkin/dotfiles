@@ -75,5 +75,6 @@ zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 
 ZVM_VI_HIGHLIGHT_FOREGROUND=#ABB2BF
 ZVM_VI_HIGHLIGHT_BACKGROUND=#3e4452
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
 
 compinit
