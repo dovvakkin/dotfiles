@@ -1,0 +1,96 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+//        {
+//          "foreground": "#45F1C2",
+//          "style": "plain",
+//          "template": "\ueb99 {{ .UserName }} on",
+//          "type": "session"
+//        },
+        {
+          "foreground": "blue",
+          "properties": {
+            "folder_separator_icon": "/",
+            "style": "full",
+            "right_format": "<b>%s</b>",
+            "gitdir_format": "<b>%s</b>",
+            "left_format": "<b>%s</b>"
+          },
+          "style": "plain",
+          "template": "{{ .Path }} ",
+          "type": "path"
+        },
+        {
+          "type": "git",
+          "style": "powerline",
+          "properties": {
+            "fetch_status": true,
+            "source": "cli",
+            "branch_icon": ""
+          },
+          "template": "<green>{{ .HEAD }}</> {{ if .Staging.Changed }}<green>{{ .Staging.String }}</> {{ end }}{{ if .Working.Changed }}<magenta>{{ .Working.String }}</>{{ end }} "
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "filler": "<black>·",
+      "segments": [
+        {
+          "type": "executiontime",
+          "style": "plain",
+          "foreground": "yellow",
+        "properties": {
+            "threshold": 60000,
+            "style": "round"
+          }
+        },
+        {
+          "style": "plain",
+          "template": "{{ if .Error }}{{ if ne .Code 0 }}<red>✘{{ else }}<green>✔{{ end }}{{ if regexMatch \".*\\\\|.*\" .String }} {{ .String }}{{ else }}{{ if gt .Code 1}} {{ reason .Code}} {{ if eq .Code 146}} {{ end }}{{ end }}{{ end }}</>{{ end }} ",
+          "properties": {
+            "always_enabled": true
+          },
+          "type": "status"
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "green",
+          "template": "{{ if .Venv }}  {{ .Venv }} {{ .Full }}{{ end }} ",
+          "properties": {
+            "home_enabled": true
+          }
+        },
+        {
+          "foreground": "15",
+          "style": "plain",
+          "template": "{{ .CurrentDate | date .Format }}",
+          "type": "time"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "style": "plain",
+          "template": "<b>{{ if eq .Code 0 }}<green>{{ else }}<red>{{ end }}$</></> ",
+          "properties": {
+            "always_enabled": true
+          },
+          "type": "status"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "version": 3
+}

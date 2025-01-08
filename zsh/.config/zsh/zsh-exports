@@ -1,12 +1,14 @@
 #!/bin/sh
-HISTSIZE=1000000
-SAVEHIST=1000000
 export PATH="$HOME/.local/bin":$PATH
 export MANPAGER='nvim +Man!'
-export MANWIDTH=999
-export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/bin:$HOME/bin:$HOME/.local/bin:$PATH"
 export EDITOR="nvim"
-export TERMINAL="alacritty"
-# eval "$(fnm env)"
-# eval "$(zoxide init zsh)"
-# eval "`pip completion --zsh`"
+export TERMINAL="kitty"
+
+if [[ $(uname -s) == "Darwin" ]]; then
+    export PATH=$PATH:/opt/homebrew/bin
+    export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
+    export LIBRARY_PATH=$LIBRARY_PATH:/opt/homebrew/opt/openssl/lib
+fi
+
+export PTPYTHON_CONFIG_HOME=$HOME/.config/ptpython/

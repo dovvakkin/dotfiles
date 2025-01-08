@@ -1,12 +1,21 @@
 # map everything to neovim
+alias v='nvim'
 alias vi='nvim'
 alias vim='nvim'
+#alias nv='/Applications/neovide.app/Contents/MacOS/neovide'
+
+alias t='tmux'
+alias ta='tmux attach -d'
+
+alias y='yazi'
 
 # use exa instead of ls
-alias l='exa'
-alias la='exa -a'
-alias ll='exa -lah'
-alias ls='exa --color=auto'
+alias l='eza'
+alias la='eza -a'
+alias ll='eza -lah'
+alias ls='eza --color=auto'
+
+alias p='ptpython'
 
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
@@ -18,10 +27,18 @@ alias cp="cp -i"
 alias mv='mv -i'
 alias rm='rm -i'
 
+alias pea='pyenv activate'
+
+function mkcd {
+  mkdir $1 && cd $1
+}
+
 # svn diff from last merged trunk
 alias svnbranch='svn info | grep URL | cut -f2 -d " "'
 alias lasttrunk='svn pget "svn:mergeinfo" | grep -P "^/trunk:" | awk -F"-" "{print \$2}"'
 alias svndiff='svn diff --old ^/trunk@r$(lasttrunk) --new $(svnbranch)'
+
+alias gd='git diff | DELTA_PAGER="less -R --mouse" delta'
 
 # easier to read disk
 alias df='df -h'     # human-readable sizes
@@ -43,3 +60,7 @@ Darwin)
     alias gosleep="osascript -e 'tell application \"Finder\" to sleep'"
 
 esac
+
+alias winreboot='sudo grub-reboot "Windows Boot Manager (on /dev/nvme0n1p1)" && sudo reboot'
+
+alias topsplit="tmux send-keys 'top' C-m \; split-window -h 'nvtop'"

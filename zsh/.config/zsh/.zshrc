@@ -2,13 +2,6 @@
 
 export ZDOTDIR=$HOME/.config/zsh
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 HISTFILE=~/.zsh_history
 setopt appendhistory
 
@@ -45,15 +38,24 @@ autoload -Uz colors && colors
 source "$ZDOTDIR/zsh-functions"
 
 # Normal files to source
+[[ -f $HOME/.job_specific.zsh ]] && source $HOME/.job_specific.zsh
 zsh_add_file "zsh-exports"
 zsh_add_file "zsh-aliases"
 zsh_add_file "zsh-prompt"
-
+zsh_add_file "zsh-tools"
+#
 # Plugins
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zdharma-continuum/fast-syntax-highlighting"
-# zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_plugin "jeffreytse/zsh-vi-mode"
+# zsh_add_plugin "qoomon/zsh-lazyload"
+
+# lazyload pyenv -- '
+#   export PYENV_ROOT="$HOME/.pyenv"
+#   export PATH="$PYENV_ROOT/bin:$PATH"
+#   eval "$(pyenv init -)"
+#   eval "$(pyenv virtualenv-init -)"
+#     '
 
 # History search keybindings for vi mode
 bindkey -M vicmd '^[[A' up-line-or-beginning-search
@@ -64,17 +66,15 @@ bindkey -M vicmd '^[[B' down-line-or-beginning-search
 bindkey -M viins '^[[B' down-line-or-beginning-search
 bindkey -M vicmd '^n' down-line-or-beginning-search
 
+
 # zsh-vi-mode overrides keybindigs othervise
 zvm_after_init_commands+=("bindkey -M viins '^n' down-line-or-beginning-search")
 zvm_after_init_commands+=("bindkey -M viins '^p' up-line-or-beginning-search")
-zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 
-# Edit line in vim with ctrl-e:
-# autoload edit-command-line; zle -N edit-command-line
-# bindkey '^e' edit-command-line
-
-ZVM_VI_HIGHLIGHT_FOREGROUND=#ABB2BF
-ZVM_VI_HIGHLIGHT_BACKGROUND=#3e4452
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+ZVM_VI_HIGHLIGHT_FOREGROUND=#d3c6aa
+ZVM_VI_HIGHLIGHT_BACKGROUND=#3a4248
+
+zvm_after_init_commands+=("source <(fzf --zsh)")
 
 compinit
