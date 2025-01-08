@@ -11,5 +11,7 @@ Notes on some configs:
     * This config relies on `ZDOTDIR` set to `$HOME/.config/zsh`. It can be achieved via `$HOME/.zshenv`:
 
     ```sh
+    # uncomment to stop having fun with vi mode :(
+    # PLEASE_NO_NO_DONT_ENABLE_VI_MODE=true
     ZDOTDIR=$HOME/.config/zsh
     ```

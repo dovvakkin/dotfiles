@@ -49,7 +49,9 @@ zsh_add_file "zsh-tools"
 # Plugins
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zdharma-continuum/fast-syntax-highlighting"
-zsh_add_plugin "jeffreytse/zsh-vi-mode"
+if (( ! ${+PLEASE_NO_NO_DONT_ENABLE_VI_MODE} )); then
+    zsh_add_plugin "jeffreytse/zsh-vi-mode"
+fi
 
 # History search keybindings
 autoload -U up-line-or-beginning-search
