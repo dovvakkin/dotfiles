@@ -57,15 +57,30 @@ zsh_add_plugin "jeffreytse/zsh-vi-mode"
 #   eval "$(pyenv virtualenv-init -)"
 #     '
 
-# History search keybindings for vi mode
-bindkey -M vicmd '^[[A' up-line-or-beginning-search
-bindkey -M viins '^[[A' up-line-or-beginning-search
-bindkey -M vicmd '^p' up-line-or-beginning-search
+# History search keybindings
+autoload -U up-line-or-beginning-search
+zle -N up-line-or-beginning-search
 
-bindkey -M vicmd '^[[B' down-line-or-beginning-search
-bindkey -M viins '^[[B' down-line-or-beginning-search
-bindkey -M vicmd '^n' down-line-or-beginning-search
+bindkey -M emacs "^[[A" up-line-or-beginning-search
+bindkey -M viins "^[[A" up-line-or-beginning-search
+bindkey -M vicmd "^[[A" up-line-or-beginning-search
+if [[ -n "${terminfo[kcuu1]}" ]]; then
+  bindkey -M emacs "${terminfo[kcuu1]}" up-line-or-beginning-search
+  bindkey -M viins "${terminfo[kcuu1]}" up-line-or-beginning-search
+  bindkey -M vicmd "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
 
+autoload -U down-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+bindkey -M emacs "^[[B" down-line-or-beginning-search
+bindkey -M viins "^[[B" down-line-or-beginning-search
+bindkey -M vicmd "^[[B" down-line-or-beginning-search
+if [[ -n "${terminfo[kcud1]}" ]]; then
+  bindkey -M emacs "${terminfo[kcud1]}" down-line-or-beginning-search
+  bindkey -M viins "${terminfo[kcud1]}" down-line-or-beginning-search
+  bindkey -M vicmd "${terminfo[kcud1]}" down-line-or-beginning-search
+fi
 
 # zsh-vi-mode overrides keybindigs othervise
 zvm_after_init_commands+=("bindkey -M viins '^n' down-line-or-beginning-search")
