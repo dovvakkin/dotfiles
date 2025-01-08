@@ -28,3 +28,33 @@ function zsh_add_completion() {
 	completion_file="$(basename "${completion_file_path}")"
 	if [ "$2" = true ] && compinit "${completion_file:1}"
 }
+
+function check_and_run() {
+
+    local executable=$1
+    local command_str=$2
+    local check_file=$3
+
+    local caller_info="${funcfiletrace[1]}"
+    local file="${caller_info%:*}"
+    local line="${caller_info##*:}"
+
+    local RED='\033[0;31m'
+    local NC='\033[0m'
+
+    # Check if executable exists in PATH
+    if ! command -v $executable >/dev/null 2>&1; then
+        echo "${RED}Error ($file:$line): '$executable' not found in PATH${NC}"
+        return 1
+    fi
+
+    # If third argument is provided, check if file exists
+    if [[ -n $check_file ]]; then
+        if [[ ! -f $check_file ]]; then
+            echo "${RED}Error ($file:$line): File '$check_file' does not exist${NC}"
+            return 1
+        fi
+    fi
+
+    eval $command_str
+}
