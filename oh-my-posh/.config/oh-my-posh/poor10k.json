@@ -5,12 +5,12 @@
       "alignment": "left",
       "newline": true,
       "segments": [
-//        {
-//          "foreground": "#45F1C2",
-//          "style": "plain",
-//          "template": "\ueb99 {{ .UserName }} on",
-//          "type": "session"
-//        },
+        {
+          "foreground": "cyan",
+          "style": "plain",
+          "template": "{{ if .SSHSession }}{{ .HostName }}{{ end }} ",
+          "type": "session"
+        },
         {
           "foreground": "blue",
           "properties": {
