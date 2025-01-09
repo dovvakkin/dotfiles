@@ -52,7 +52,7 @@
         },
         {
           "style": "plain",
-          "template": "{{ if .Error }}{{ if ne .Code 0 }}<red>✘{{ else }}<green>✔{{ end }}{{ if regexMatch \".*\\\\|.*\" .String }} {{ .String }}{{ else }}{{ if gt .Code 1}} {{ reason .Code}} {{ if eq .Code 146}} {{ end }}{{ end }}{{ end }}</>{{ end }} ",
+          "template": "{{ if .Error }}{{ if ne .Code 0 }}<red>✘{{ else }}<green>✔{{ end }}{{ if regexMatch \".*\\\\|.*\" .String }} {{ .String }}{{ else }}{{ if gt .Code 1}} {{ reason .Code}} {{ if or ( eq .Code 146 ) ( eq .Code 148 ) }} {{ end }}{{ end }}{{ end }}</>{{ end }} ",
           "properties": {
             "always_enabled": true
           },
